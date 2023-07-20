@@ -16,9 +16,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 class BinaryTreeTest {
 
     final long RANDOM_SEED_FIRST = 123;
-    final long RANDOM_SEED_SECOND = (new Random(RANDOM_SEED_FIRST)).nextLong();
+    final long RANDOM_SEED_SECOND = 321;
+
     final long BIG_TEST_TREE_SIZE = 10_000;
     final int[] TREE_VALUES_SMALL = new int[]{1, 2, 3, 4, 5, 5, 5, 5};
+
 
     BinaryTree firstTree = BinaryTreeImpl.of(new Random(RANDOM_SEED_FIRST), TREE_VALUES_SMALL);
     BinaryTree secondTree = BinaryTreeImpl.of(new Random(RANDOM_SEED_SECOND),
@@ -70,14 +72,5 @@ class BinaryTreeTest {
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         assertEquals(expected, valuesToCounts);
-    }
-
-    @Test
-    void wtf(){
-        Object a = new Object();
-        var cl = a.getClass();
-        var fields = cl.getFields();
-        System.out.println(fields.length);
-        System.out.println(cl.getDeclaredFields().length);
     }
 }
