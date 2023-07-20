@@ -58,14 +58,15 @@ I will call such classes and their instances 'trusted'. Other are 'non-trusted'.
   For runtime it's just a `List<Object>`. To ensure that `equals` won't call `equals` from
   non-trusted
   classes, we have to check every element of list.
-- Using reflection such operation could be done for all classes: get all accessible objects and
+    - Using reflection such operation could be done for all classes: get all accessible objects and
   check them.
-    - But this method may cause false negatives: object may contain `Object` fields, but don't use
+        - But this method may cause false negatives: object may contain `Object` fields, but don't use
+    - Alternative approach is to write such check for every problem class we want. One for `Collection`,
+  one for `Map`, etc.
       them in `equals`
     - There can occur links cycle. Have to handle it.
     - So accurate check may be done only in source code.
-- Alternative approach is to write such check for every problem class we want. One for `Collection`,
-  one for `Map`, etc.
+
 
 ### 2. Compare fields using reflection
 
