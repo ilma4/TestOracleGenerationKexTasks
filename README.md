@@ -37,8 +37,7 @@ remarks about them further.
 ### 0. Things before comparing
 
 1. Check identity. If it's true, no need to do other work.
-2. Check `equals` is reflexive: if `!a.equals(a)` or `!b.equals(b)` then it's a bug in program,
-   which may affected comparing objects
+2. Check if `equals` is reflexive: if `!a.equals(a)` or `!b.equals(b)` then it's a bug in program. Enought to make a report
 3. Check if `equals` is symmetric: if `a.equals(b) != b.equals(a)` then same as in 2.
 
 ### 1. Using `equals` if objects are instances of standard libraries classes
