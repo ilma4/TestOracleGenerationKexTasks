@@ -80,7 +80,7 @@ If some fields can't be compared by other methods, then use this method.
 
 #### Cons:
 
-- May not satisfy `equals` contract. Two 'equal' objects may have different hashCode. For example:
+- May not satisfy `java.lang.Object::equals` contract. Two 'equal' objects may have different hashCode. For example:
   if `hashCode` is from `java.lang.Object`
 - Works clearly only if objects are exactly same class (can't compare `ArrayList` and `LinkedList`)
 - Have to handle links cycles.
