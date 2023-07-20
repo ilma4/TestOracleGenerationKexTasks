@@ -115,7 +115,9 @@ for all int x:
 2. `a' = a.remove(x)`, `b' = b.remove(x)` \
    `a'` have similar contents with `b'`
 
-Thus leads to `a.count(x) == b.count(x)`
+Thus leads to necessary and sufficient condition:  
+
+forall int x: `a.count(x) == b.count(x)`
 
 ### Code
 
