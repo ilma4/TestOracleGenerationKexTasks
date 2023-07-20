@@ -42,9 +42,9 @@ remarks about them further.
 
 ### 1. Using `equals` if objects are instances of standard libraries classes
 
-No need to do complex work to check two `String` or `Integer` objects.
+No need to do complex work to compare two `String` or `Integer` objects. 
 
-I will call such classes and their instances 'trusted'. Other are 'non-trusted'.
+I will call classes wich instances can be compared using `equals` 'trusted'. Other are 'non-trusted'.
 
 #### Pros:
 
