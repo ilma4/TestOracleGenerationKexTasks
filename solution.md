@@ -43,9 +43,7 @@ remarks about them further.
 
 No need to do complex work to check two `String` or `Integer` objects.
 
-I will can such classes and their instances 'trusted'. Other are 'non-trusted'.
-
-
+I will call such classes and their instances 'trusted'. Other are 'non-trusted'.
 
 #### Pros:
 
@@ -55,15 +53,17 @@ I will can such classes and their instances 'trusted'. Other are 'non-trusted'.
 
 - Require additional checking for classes, calling `equals` on possibly non-trusted objects.
   On example of `List<Number>`:
-  For runtime it's just a `List<Object>`. To ensure that `equals` won't call `equals` from bad
+  For runtime it's just a `List<Object>`. To ensure that `equals` won't call `equals` from
+  non-trusted
   classes, we have to check every element of list.
 - Using reflection such operation could be done for all classes: get all accessible objects and
   check them.
     - But this method may cause false negatives: object may contain `Object` fields, but don't use
       them in `equals`
     - There can occur links cycle. Have to handle it.
-    -  So accurate check may be done only in source code.
-- Alternative approach is to write such check for every problem class we want. One for `Collection`, one for `Map`, etc.
+    - So accurate check may be done only in source code.
+- Alternative approach is to write such check for every problem class we want. One for `Collection`,
+  one for `Map`, etc.
 
 ### 2. Compare fields using reflection
 
@@ -77,8 +77,10 @@ If some fields can't be compared by other methods, then use this method.
 
 #### Cons:
 
+- May not satisfy `equals` contract. Two 'equal' objects may have different hashCode. For example:
+  if `hashCode` is from `java.lang.Object`
 - Works clearly only if objects are exactly same class (can't compare `ArrayList` and `LinkedList`)
-- Have to handle links cycles. 
+- Have to handle links cycles.
 - May occurs false negatives. Example:
 
  ```java
@@ -99,16 +101,23 @@ var list5=new ArrayList<Integer>(5); // capacity 5
 - False positives: two different objects can have the same hash code.\
   In that case `toString` may help: if results of `toString` are different then objects are
   different.
+- For arrays should be used `Arrays::hashCode` and `Arrays::deepHashCode` respectively
 
 ## Task 3.
 
+### Similarity definition
+
 My definition of 'similarity': `BinaryTree` `a` have similar contents with `BinaryTree` `b` iff
 
-for all int x: 
+for all int x:
 
 1. `a.contains(x) == b.contains(x)`
 2. `a' = a.remove(x)`, `b' = b.remove(x)` \
-`a'` have similar contents with `b'`
+   `a'` have similar contents with `b'`
+
+Thus leads to `a.count(x) == b.count(x)`
+
+### Code
 
 BinaryTree [abstract class](src/main/java/org/example/BinaryTree.java). `contentsSimilar` is here.
 
